@@ -107,46 +107,7 @@ class Test_Draketech_Admin {
 	 */
 	
     function cptui_register_my_cpts() {
-    
-        $labels = [
-        	"name" => __( "Productos", "twentytwentytwo" ),
-        	"singular_name" => __( "Producto", "twentytwentytwo" ),
-        ];
-        
-        $args = [
-        	"label" => __( "Productos", "twentytwentytwo" ),
-        	"labels" => $labels,
-        	"description" => "",
-        	"public" => true,
-        	"publicly_queryable" => true,
-        	"show_ui" => true,
-        	"show_in_rest" => true,
-        	"rest_base" => "",
-        	"rest_controller_class" => "WP_REST_Posts_Controller",
-        	"has_archive" => false,
-        	"show_in_menu" => true,
-        	"show_in_nav_menus" => true,
-        	"delete_with_user" => false,
-        	"exclude_from_search" => false,
-        	"capability_type" => "post",
-        	"map_meta_cap" => true,
-        	"hierarchical" => false,
-        	"rewrite" => [ "slug" => "productos", "with_front" => true ],
-        	"query_var" => true,
-        	"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
-        	"show_in_graphql" => false,
-        ];
-        
-        register_post_type( "productos", $args );
-    }
-        
-    /**
-    * Register my_cpts_productos
-    *
-    * @since    1.0.0
-    */
-    function cptui_register_my_cpts_productos() {
-    
+
     	/**
     	 * Post Type: Productos.
     	 */
@@ -173,10 +134,54 @@ class Test_Draketech_Admin {
     		"exclude_from_search" => false,
     		"capability_type" => "post",
     		"map_meta_cap" => true,
-    		"hierarchical" => false,
+    		"hierarchical" => true,
     		"rewrite" => [ "slug" => "productos", "with_front" => true ],
     		"query_var" => true,
     		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
+    		"taxonomies" => [ "cat_producto" ],
+    		"show_in_graphql" => false,
+    	];
+    
+    	register_post_type( "productos", $args );
+    }
+
+
+
+        
+    /**
+    * Register my_cpts_productos
+    *
+    * @since    1.0.0
+    */
+    function cptui_register_my_cpts_productos() {
+        
+    	$labels = [
+    		"name" => __( "Productos", "twentytwentytwo" ),
+    		"singular_name" => __( "Producto", "twentytwentytwo" ),
+    	];
+    
+    	$args = [
+    		"label" => __( "Productos", "twentytwentytwo" ),
+    		"labels" => $labels,
+    		"description" => "",
+    		"public" => true,
+    		"publicly_queryable" => true,
+    		"show_ui" => true,
+    		"show_in_rest" => true,
+    		"rest_base" => "",
+    		"rest_controller_class" => "WP_REST_Posts_Controller",
+    		"has_archive" => false,
+    		"show_in_menu" => true,
+    		"show_in_nav_menus" => true,
+    		"delete_with_user" => false,
+    		"exclude_from_search" => false,
+    		"capability_type" => "post",
+    		"map_meta_cap" => true,
+    		"hierarchical" => true,
+    		"rewrite" => [ "slug" => "productos", "with_front" => true ],
+    		"query_var" => true,
+    		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
+    		"taxonomies" => [ "cat_producto" ],
     		"show_in_graphql" => false,
     	];
     
@@ -203,7 +208,7 @@ class Test_Draketech_Admin {
     		"labels" => $labels,
     		"public" => true,
     		"publicly_queryable" => true,
-    		"hierarchical" => false,
+    		"hierarchical" => true,
     		"show_ui" => true,
     		"show_in_menu" => true,
     		"show_in_nav_menus" => true,
@@ -239,7 +244,7 @@ class Test_Draketech_Admin {
     		"labels" => $labels,
     		"public" => true,
     		"publicly_queryable" => true,
-    		"hierarchical" => false,
+    		"hierarchical" => true,
     		"show_ui" => true,
     		"show_in_menu" => true,
     		"show_in_nav_menus" => true,

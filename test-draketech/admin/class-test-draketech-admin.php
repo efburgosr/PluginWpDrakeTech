@@ -99,5 +99,165 @@ class Test_Draketech_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/test-draketech-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+	
+	/**
+	 * Register Post Type: Productos.
+	 *
+	 * @since    1.0.0
+	 */
+	
+    function cptui_register_my_cpts() {
+    
+        $labels = [
+        	"name" => __( "Productos", "twentytwentytwo" ),
+        	"singular_name" => __( "Producto", "twentytwentytwo" ),
+        ];
+        
+        $args = [
+        	"label" => __( "Productos", "twentytwentytwo" ),
+        	"labels" => $labels,
+        	"description" => "",
+        	"public" => true,
+        	"publicly_queryable" => true,
+        	"show_ui" => true,
+        	"show_in_rest" => true,
+        	"rest_base" => "",
+        	"rest_controller_class" => "WP_REST_Posts_Controller",
+        	"has_archive" => false,
+        	"show_in_menu" => true,
+        	"show_in_nav_menus" => true,
+        	"delete_with_user" => false,
+        	"exclude_from_search" => false,
+        	"capability_type" => "post",
+        	"map_meta_cap" => true,
+        	"hierarchical" => false,
+        	"rewrite" => [ "slug" => "productos", "with_front" => true ],
+        	"query_var" => true,
+        	"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
+        	"show_in_graphql" => false,
+        ];
+        
+        register_post_type( "productos", $args );
+    }
+        
+    /**
+    * Register my_cpts_productos
+    *
+    * @since    1.0.0
+    */
+    function cptui_register_my_cpts_productos() {
+    
+    	/**
+    	 * Post Type: Productos.
+    	 */
+    
+    	$labels = [
+    		"name" => __( "Productos", "twentytwentytwo" ),
+    		"singular_name" => __( "Producto", "twentytwentytwo" ),
+    	];
+    
+    	$args = [
+    		"label" => __( "Productos", "twentytwentytwo" ),
+    		"labels" => $labels,
+    		"description" => "",
+    		"public" => true,
+    		"publicly_queryable" => true,
+    		"show_ui" => true,
+    		"show_in_rest" => true,
+    		"rest_base" => "",
+    		"rest_controller_class" => "WP_REST_Posts_Controller",
+    		"has_archive" => false,
+    		"show_in_menu" => true,
+    		"show_in_nav_menus" => true,
+    		"delete_with_user" => false,
+    		"exclude_from_search" => false,
+    		"capability_type" => "post",
+    		"map_meta_cap" => true,
+    		"hierarchical" => false,
+    		"rewrite" => [ "slug" => "productos", "with_front" => true ],
+    		"query_var" => true,
+    		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
+    		"show_in_graphql" => false,
+    	];
+    
+    	register_post_type( "productos", $args );
+    }
+
+
+    /**
+    * Taxonomy: Categorías.
+    *
+    * @since    1.0.0
+    */
+
+    function cptui_register_my_taxes() {
+    
+    	$labels = [
+    		"name" => __( "Categorías", "twentytwentytwo" ),
+    		"singular_name" => __( "Categoría", "twentytwentytwo" ),
+    	];
+    
+    	
+    	$args = [
+    		"label" => __( "Categorías", "twentytwentytwo" ),
+    		"labels" => $labels,
+    		"public" => true,
+    		"publicly_queryable" => true,
+    		"hierarchical" => false,
+    		"show_ui" => true,
+    		"show_in_menu" => true,
+    		"show_in_nav_menus" => true,
+    		"query_var" => true,
+    		"rewrite" => [ 'slug' => 'cat_producto', 'with_front' => true, ],
+    		"show_admin_column" => false,
+    		"show_in_rest" => true,
+    		"show_tagcloud" => false,
+    		"rest_base" => "cat_producto",
+    		"rest_controller_class" => "WP_REST_Terms_Controller",
+    		"show_in_quick_edit" => false,
+    		"show_in_graphql" => false,
+    	];
+    	register_taxonomy( "cat_producto", [ "productos" ], $args );
+    }
+
+    /**
+    * Taxonomy: Categorías.
+    * cptui_register_my_taxes_cat_producto
+    * @since    1.0.0
+    */
+
+    function cptui_register_my_taxes_cat_producto() {
+    
+    	$labels = [
+    		"name" => __( "Categorías", "twentytwentytwo" ),
+    		"singular_name" => __( "Categoría", "twentytwentytwo" ),
+    	];
+    
+    	
+    	$args = [
+    		"label" => __( "Categorías", "twentytwentytwo" ),
+    		"labels" => $labels,
+    		"public" => true,
+    		"publicly_queryable" => true,
+    		"hierarchical" => false,
+    		"show_ui" => true,
+    		"show_in_menu" => true,
+    		"show_in_nav_menus" => true,
+    		"query_var" => true,
+    		"rewrite" => [ 'slug' => 'cat_producto', 'with_front' => true, ],
+    		"show_admin_column" => false,
+    		"show_in_rest" => true,
+    		"show_tagcloud" => false,
+    		"rest_base" => "cat_producto",
+    		"rest_controller_class" => "WP_REST_Terms_Controller",
+    		"show_in_quick_edit" => false,
+    		"show_in_graphql" => false,
+    	];
+    	register_taxonomy( "cat_producto", [ "productos" ], $args );
+    }
+
+
+
+	
 
 }

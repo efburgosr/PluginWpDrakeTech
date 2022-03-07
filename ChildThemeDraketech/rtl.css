@@ -1,0 +1,9 @@
+/*
+Theme Name:     draketech
+Template:       sinatra
+
+This is the child theme for Sinatra theme, generated with Generate Child Theme plugin by catchthemes.
+
+Right to Left text support.
+*/
+@import url("../sinatra/rtl.css");

@@ -183,6 +183,8 @@ class Test_Draketech_Admin {
     		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
     		"taxonomies" => [ "cat_producto" ],
     		"show_in_graphql" => false,
+    		'menu_icon' => plugins_url( './test-draketech/admin/img/icon.png' ),
+    		'menu_position' => 7,
     	];
     
     	register_post_type( "productos", $args );
@@ -263,6 +265,81 @@ class Test_Draketech_Admin {
 
 
 
-	
+    public function fields_price_metabox() {
+      add_meta_box( 'fields-price-metabox', 'Precio de los productos', array( $this, 'fields_price' ), 'productos', 'normal', 'high' );
+    }
+
+
+    public function fields_price( $post ) {
+ 
+        // Add an nonce field so we can check for it later.
+        wp_nonce_field( 'fields_price_metabox', 'fields_price_metabox_nonce' );
+ 
+        // Use get_post_meta to retrieve an existing value from the database.
+        $field_price_product = get_post_meta( $post->ID, 'field_price_product', true );
+ 
+        // Display the form, using the current value.
+        ?>
+        <label for="field_price_product">
+            <?php _e( 'Precio del producto: ', 'textdomain' ); ?>
+        </label>
+        <input type="text" id="field_price_product" name="field_price_product" value="<?php echo esc_attr( $field_price_product ); ?>" size="25" />
+        <?php
+    }
+
+
+    function fields_price_save_data($post_id) {
+        // Comprobamos si se ha definido el nonce.
+        if ( ! isset( $_POST['fields_price_metabox_nonce'] ) ) {
+        return $post_id;
+        }
+        $nonce = $_POST['fields_price_metabox_nonce'];
+        
+        // Verificamos que el nonce es válido.
+        if ( !wp_verify_nonce( $nonce, 'fields_price_metabox' ) ) {
+        return $post_id;
+        }
+        
+        // Si es un autoguardado nuestro formulario no se enviará, ya que aún no queremos hacer nada.
+        if ( defined( 'DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+        return $post_id;
+        }
+        
+        // Comprobamos los permisos de usuario.
+        if ( $_POST['post_type'] == 'page' ) {
+        if ( !current_user_can( 'edit_page', $post_id ) )
+          return $post_id;
+        } else {
+        if ( !current_user_can( 'edit_post', $post_id ) )
+          return $post_id;
+        }
+        
+        // Vale, ya es seguro que guardemos los datos.
+        
+        // Si existen entradas antiguas las recuperamos
+        $old_field_price_product = get_post_meta( $post_id, 'field_price_product', true );
+        
+        // Saneamos lo introducido por el usuario.
+        $field_price_product = sanitize_text_field( $_POST['field_price_product'] );
+        
+        // Actualizamos el campo meta en la base de datos.
+        update_post_meta( $post_id, 'field_price_product', $field_price_product, $old_field_price_product );
+      
+    }
+    
+    
+    public function plugin_menu_administrador() {
+	    add_menu_page(
+            __( 'Test draketech', 'textdomain' ),
+            'Test draketech',
+            'manage_options',
+            plugin_dir_path( __FILE__ ) .'/partials/test-draketech-admin-display.php',
+            '',
+            plugins_url( './test-draketech/admin/img/icon.png' ),
+            6
+        );
+        add_submenu_page(plugin_dir_path( __FILE__ ) .'/partials/test-draketech-admin-display.php','Productos','Productos','manage_options', '/edit.php?post_type=productos');
+    }
+
 
 }

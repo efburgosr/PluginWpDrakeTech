@@ -1,7 +1,25 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+/*
+Theme Name: draketech
+Author: EduarB
+Description: Child theme of siantrta
+Version: 1.0
+Template: sinatra
+
+This is the child theme for Sinatra theme, generated with Generate Child Theme plugin by catchthemes.
+
+(optional values you can add: Theme URI, Author URI, License, License URI, Tags, Text Domain)
+*/
+
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  color: #777;
+}
+
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 

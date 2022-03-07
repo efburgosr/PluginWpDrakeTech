@@ -27,8 +27,7 @@ d. [list_product showposts="8" ids="3" operator="NOT IN"] //Muestra 8 post e tod
 This section describes how to install the plugin and get it working.
 
 1. Upload `test-draketech.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
